@@ -1,0 +1,352 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Subtle Floating Elements */
+.floating-shape {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(147, 51, 234, 0.05));
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatGentle 8s ease-in-out infinite;
+}
+
+.floating-shape:nth-child(1) {
+  width: 120px;
+  height: 120px;
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+}
+.floating-shape:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  right: 15%;
+  top: 30%;
+  animation-delay: 2s;
+}
+.floating-shape:nth-child(3) {
+  width: 60px;
+  height: 60px;
+  left: 20%;
+  bottom: 25%;
+  animation-delay: 4s;
+}
+.floating-shape:nth-child(4) {
+  width: 100px;
+  height: 100px;
+  right: 20%;
+  bottom: 20%;
+  animation-delay: 1s;
+}
+
+@keyframes floatGentle {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translateY(10px) translateX(-10px);
+    opacity: 0.4;
+  }
+}
+
+/* Clean Card Design */
+.login-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Input Animations - Dashboard Style */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  color: #374151;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+}
+
+.input-field:focus + .input-label {
+  transform: translateY(-2.2rem) scale(0.85);
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.input-field:not(:placeholder-shown) + .input-label {
+  transform: translateY(-2.2rem) scale(0.85);
+  color: #3b82f6;
+}
+
+.input-label {
+  position: absolute;
+  left: 3rem;
+  top: 0.875rem;
+  color: #6b7280;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: white;
+  padding: 0 0.5rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus ~ .input-icon {
+  color: #3b82f6;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Button Animations - Dashboard Style */
+.login-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: none;
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.login-button.loading {
+  pointer-events: none;
+}
+
+.login-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.login-button:hover::before {
+  left: 100%;
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Logo Animation */
+.logo-container {
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Success Animation */
+.success-checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #10b981;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px #10b981;
+  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.success-checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #10b981;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.success-checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #10b981;
+  }
+}
+
+/* Shake Animation for Errors */
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In Animation */
+.slide-in {
+  animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Error State */
+.input-error {
+  border-color: #ef4444 !important;
+}
+
+.input-error:focus {
+  border-color: #ef4444 !important;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.15) !important;
+}
