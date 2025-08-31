@@ -2,22 +2,14 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { SessionProvider } from "@/app/providers/session-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ApexPayments - Dashboard de Pagamentos",
-  description: "Plataforma completa de pagamentos digitais com controle total das suas transações financeiras",
-  keywords: "pagamentos, fintech, transações, dashboard financeiro, ApexPayments",
-  authors: [{ name: "ApexPayments" }],
-  viewport: "width=device-width, initial-scale=1",
-  robots: "index, follow",
-  openGraph: {
-    title: "ApexPayments - Dashboard de Pagamentos",
-    description: "Plataforma completa de pagamentos digitais com controle total das suas transações financeiras",
-    type: "website",
-    locale: "pt_BR",
-  },
+  title: "ApexPayments Dashboard",
+  description: "Sistema de pagamentos e gestão financeira",
     generator: 'v0.app'
 }
 
@@ -28,7 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
+      </body>
     </html>
   )
 }
